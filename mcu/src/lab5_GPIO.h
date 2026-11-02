@@ -42,9 +42,9 @@ typedef struct {
 } GPIO;
 
 // Pointers to GPIO-sized chunks of memory for each peripheral
-#define GPIOB ((GPIO *) GPIOB_BASE)
+#define GPIOA ((GPIO *) GPIOA_BASE)
 
-#define GPIO GPIOB
+#define GPIO GPIOA
 
 ///////////////////////////////////////////////////////////////////////////////
 // Function prototypes

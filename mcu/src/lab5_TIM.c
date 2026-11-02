@@ -5,7 +5,7 @@
 #include "lab5_RCC.h"
 
 //configure TIM6 to count 1ms
-void configureTIM6() {
+void configureTIM6(void) {
     //enable TIM6 clock
     RCC->APB1ENR1 |=(1<<4);
 

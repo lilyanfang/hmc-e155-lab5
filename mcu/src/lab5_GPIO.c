@@ -2,6 +2,7 @@
 // Source code for GPIO functions
 
 #include "lab5_GPIO.h"
+#include "lab5_RCC.h"
 
 void pinMode(int pin, int function) {
     switch(function) {
