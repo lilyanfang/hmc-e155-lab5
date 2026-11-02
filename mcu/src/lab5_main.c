@@ -89,14 +89,7 @@ int main(void) {
       else {
         freq = count/(4*REV_RATIO);
       }
-      //CW = (CWcount > CCWcount);
-      //only update direction if over 1/2 the pulses were CW/CCW
-      if (CWcount > (count/2)) {
-        CW = 1;
-      }
-      else if (CCWcount > count/2) {
-        CW = 0;
-      }
+      CW = (CWcount > CCWcount);
       printf("%f", freq);
       printf(" rev/s");
       if (CW) {
