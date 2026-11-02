@@ -30,13 +30,13 @@ void EXTI9_5_IRQHandler(void){
             CWcount++; //clockwise if at rising edge B is false
         }
         else if ((~A) & B) {
-            CWcount++; //clockwise if at falling edge B is positive
+            CWcount++; //clockwise if at falling edge B is true
         }
         else if (A&B) {
-            CCWcount++;
+            CCWcount++; //counterclockwise if at rising edge B is true
         }
         else if ((~A)&(~B)) {
-            CCWcount++;
+            CCWcount++; //counterclockwise if at falling edge B is false
         }
     }
 }
@@ -48,16 +48,16 @@ void EXTI15_10_IRQHandler(void){
         EXTI->PR1 = (1<<11); //write bit to 1 to reset
         count++; //increment counter by 1
         if (B&A) {
-            CWcount++;
+            CWcount++; //clockwise if at rising edge A is true
         }
         else if ((~B)&(~A)) {
-            CWcount++;
+            CWcount++; //clockwise if at falling edge A is false
         }
         else if ((~B)&A) {
-            CCWcount++;
+            CCWcount++; //counterclockwise if at falling edge A is true
         }
         else if (B&(~A)) {
-            CCWcount++;
+            CCWcount++; //counterclockwise if at rising edge A is false
         }
     }
 }
@@ -89,8 +89,16 @@ int main(void) {
       else {
         freq = count/(4*REV_RATIO);
       }
-      CW = (CWcount > CCWcount);
+      //CW = (CWcount > CCWcount);
+      //only update direction if over 1/2 the pulses were CW/CCW
+      if (CWcount > (count/2)) {
+        CW = 1;
+      }
+      else if (CCWcount > count/2) {
+        CW = 0;
+      }
       printf("%f", freq);
+      printf(" rev/s");
       if (CW) {
         printf(" CW \n");
       }
