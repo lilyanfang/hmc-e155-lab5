@@ -53,7 +53,7 @@ void EXTI15_10_IRQHandler(void){
         else if ((~B)&(~A)) {
             CWcount++; //clockwise if at falling edge A is false
         }
-        else if ((~B)&A) {
+        if ((~B)&A) {
             CCWcount++; //counterclockwise if at falling edge A is true
         }
         else if (B&(~A)) {
@@ -61,6 +61,36 @@ void EXTI15_10_IRQHandler(void){
         }
     }
 }
+
+
+//////////LLM code for an interrupt handler
+// volatile int32_t encoder_position = 0;
+
+// void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+// {
+//     if (GPIO_Pin == GPIO_PIN_3) // Encoder Channel A on PA3
+//     {
+//         GPIO_PinState pinA = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_3);
+//         GPIO_PinState pinB = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_4);
+
+//         if (pinA == pinB) {
+//             encoder_position++;
+//         } else {
+//             encoder_position--;
+//         }
+//     }
+//     else if (GPIO_Pin == GPIO_PIN_4) // Encoder Channel B on PA4
+//     {
+//         GPIO_PinState pinA = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_3);
+//         GPIO_PinState pinB = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_4);
+
+//         if (pinA != pinB) {
+//             encoder_position++;
+//         } else {
+//             encoder_position--;
+//         }
+//     }
+// }
 
 int main(void) {
     //configureClock(); //clk at 4MHz
